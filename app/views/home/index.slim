@@ -1,0 +1,18 @@
+h1 Автозапчасти
+
+= form_tag home_index_path, method: 'get' do
+  = label_tag 'Введите номер '
+  = text_field_tag 'oem'
+  button type="submit" Поиск
+
+  a href="/"
+    button Сбросить
+
+- unless @result.nil?
+  - @oem = params[:oem]
+  - if @result.blank?
+    = "Товар с номером #{@oem} не найден"
+  - elsif params[:brand].nil?
+    = render 'table_brands'
+  - else
+    = render 'table_products', products: @result

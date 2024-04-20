@@ -1,0 +1,10 @@
+h1 Изменить настройку
+= form_for @setting, url: setting_path(@setting), method: :patch, remote: true  do |f|
+  div
+    strong Имя настройки:
+    = @setting.name
+  div
+    = f.label :value, "Значение настройки:"
+    = f.text_field :value
+  div
+    = f.submit "Сохранить"

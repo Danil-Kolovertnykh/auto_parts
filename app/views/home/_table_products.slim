@@ -1,0 +1,29 @@
+- @markup = Setting.find_by_name("markup")&.value.to_f
+table
+  thead
+    tr
+      th Бренд
+      th Номер
+      th Название
+      th Кол
+      th Цена
+      th Цена с наценкой
+      th Срок доставки Мин
+      th Срок доставки Макс
+      th Кол. для заказа
+      - if params[:controller] != "carts"
+        th Добавить в корзину
+  tbody
+    - products.each do |product|
+      tr
+        td = product['make_name']
+        td = product['oem']
+        td = product['detail_name']
+        td = product['qnt']
+        td = sprintf('%.2f', product['cost'].to_f)
+        td = sprintf('%.2f', product['cost'].to_f * @markup)
+        td = product['min_delivery_day']
+        td = product['max_delivery_day']
+        td = product['min_qnt']
+        - if params[:controller] != "carts"
+          td = link_to 'Добавить в корзину', add_to_cart_path(product), method: :post

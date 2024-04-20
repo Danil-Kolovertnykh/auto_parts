@@ -1,0 +1,8 @@
+table
+  thead
+    tr
+      th Бренд
+  tbody
+    - @result.each do |product|
+      tr
+        td = link_to product['brand'], root_path(oem: @oem, brand: product['brand'])
